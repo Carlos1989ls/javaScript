@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Ahorcado</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #palabra { font-size: 2em; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Juego del Ahorcado</h1>
+    <p>Introduce una letra:</p>
+    <input type="text" id="letra" maxlength="1">
+    <button onclick="comprobarLetra()">Comprobar</button>
+    <p id="palabra">_ _ _ _ _</p>
+    <p id="intentos">Intentos restantes: 10</p>
+    
+    <script>
+        let palabraSecreta = "";
+        let palabraAdivinada = [];
+        let intentos = 10;
+
+        async function obtenerPalabra() {
+            try {
+                let response = await fetch("https://random-word-api.herokuapp.com/word?number=1");
+                let data = await response.json();
+                palabraSecreta = data[0].toUpperCase();
+                palabraAdivinada = Array(palabraSecreta.length).fill("_");
+                document.getElementById("palabra").textContent = palabraAdivinada.join(" ");
+            } catch (error) {
+                alert("Error obteniendo la palabra");
+            }
+        }
+
+        function comprobarLetra() {
+            let letra = document.getElementById("letra").value.toUpperCase();
+            document.getElementById("letra").value = "";
+
+            if (letra && palabraSecreta.includes(letra)) {
+                for (let i = 0; i < palabraSecreta.length; i++) {
+                    if (palabraSecreta[i] === letra) {
+                        palabraAdivinada[i] = letra;
+                    }
+                }
+            } else {
+                intentos--;
+            }
+            document.getElementById("palabra").textContent = palabraAdivinada.join(" ");
+            document.getElementById("intentos").textContent = `Intentos restantes: ${intentos}`;
+
+            if (!palabraAdivinada.includes("_")) {
+                alert("¡Felicidades! Has adivinado la palabra: " + palabraSecreta);
+                obtenerPalabra();
+            } else if (intentos === 0) {
+                alert("Game over! La palabra era: " + palabraSecreta);
+                obtenerPalabra();
+            }
+        }
+
+        obtenerPalabra();
+    </script>
+</body>
+</html>

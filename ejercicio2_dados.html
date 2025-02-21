@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Dados</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .dado { width: 100px; height: 100px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Juego de Dados</h1>
+    <p>Tira los dados y suma sus valores</p>
+    <img id="dado1" class="dado" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg" alt="Dado 1">
+    <img id="dado2" class="dado" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg" alt="Dado 2">
+    <p id="resultado">Suma: 2</p>
+    <button onclick="tirarDados()">Tirar Dados</button>
+    
+    <script>
+        const imagenesDados = {
+            1: "https://upload.wikimedia.org/wikipedia/commons/1/1b/Dice-1-b.svg",
+            2: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Dice-2-b.svg",
+            3: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Dice-3-b.svg",
+            4: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Dice-4-b.svg",
+            5: "https://upload.wikimedia.org/wikipedia/commons/0/08/Dice-5-b.svg",
+            6: "https://upload.wikimedia.org/wikipedia/commons/2/26/Dice-6-b.svg"
+        };
+        
+        function tirarDados() {
+            let dado1 = Math.floor(Math.random() * 6) + 1;
+            let dado2 = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("dado1").src = imagenesDados[dado1];
+            document.getElementById("dado2").src = imagenesDados[dado2];
+            document.getElementById("resultado").textContent = `Suma: ${dado1 + dado2}`;
+        }
+    </script>
+</body>
+</html>
+

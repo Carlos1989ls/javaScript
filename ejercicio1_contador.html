@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #contador { font-size: 2em; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Contador</h1>
+    <p id="contador">0</p>
+    <button onclick="incrementar()">Añadir</button>
+    <button onclick="disminuir()">Quitar</button>
+    <button onclick="resetear()">Reset</button>
+    
+    <script>
+        let contador = 0;
+        function actualizarContador() {
+            document.getElementById("contador").textContent = contador;
+        }
+        function incrementar() {
+            if (contador < 10) {
+                contador++;
+                actualizarContador();
+            } else {
+                alert("El contador no puede ser mayor que 10");
+            }
+        }
+        function disminuir() {
+            if (contador > 0) {
+                contador--;
+                actualizarContador();
+            } else {
+                alert("El contador no puede ser negativo");
+            }
+        }
+        function resetear() {
+            contador = 0;
+            actualizarContador();
+        }
+    </script>
+</body>
+</html>

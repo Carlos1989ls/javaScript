@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Vuelo</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #abortMission { background-color: lightgray; }
+    </style>
+</head>
+<body>
+    <h1>Simulador de Vuelo Espacial</h1>
+    <p id="statusReport">The shuttle is on the ground</p>
+    <button id="liftoffButton">Take off</button>
+    <button id="abortMission">Abort Mission</button>
+    
+    <script>
+        document.getElementById("liftoffButton").addEventListener("click", function() {
+            document.getElementById("statusReport").textContent = "Houston, we have liftoff!";
+        });
+
+        document.getElementById("abortMission").addEventListener("mouseover", function() {
+            this.style.backgroundColor = "red";
+        });
+
+        document.getElementById("abortMission").addEventListener("mouseout", function() {
+            this.style.backgroundColor = "";
+        });
+
+        document.getElementById("abortMission").addEventListener("click", function() {
+            let confirmAbort = confirm("Are you sure you want to abort the mission?");
+            if (confirmAbort) {
+                document.getElementById("statusReport").textContent = "Mission aborted! Space shuttle returning home.";
+            }
+        });
+    </script>
+</body>
+</html>

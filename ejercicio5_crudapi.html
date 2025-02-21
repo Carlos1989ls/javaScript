@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD con API REST</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        input, button { margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Gestión de elementos con CRUD API</h1>
+    <input type="text" id="nombre" placeholder="Nombre del elemento">
+    <button onclick="crearElemento()">Agregar</button>
+    <ul id="lista"></ul>
+    
+    <script>
+        const API_URL = "https://crudcrud.com/api/87b5f66d7d8545048a88d418f133f5b6/elementos";
+        
+        async function obtenerElementos() {
+            let response = await fetch(API_URL);
+            let data = await response.json();
+            let lista = document.getElementById("lista");
+            lista.innerHTML = "";
+            data.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = item.nombre;
+                let btnEliminar = document.createElement("button");
+                btnEliminar.textContent = "Eliminar";
+                btnEliminar.onclick = () => eliminarElemento(item._id);
+                li.appendChild(btnEliminar);
+                lista.appendChild(li);
+            });
+        }
+        
+        async function crearElemento() {
+            let nombre = document.getElementById("nombre").value;
+            if (!nombre) return;
+            await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nombre })
+            });
+            document.getElementById("nombre").value = "";
+            obtenerElementos();
+        }
+        
+        async function eliminarElemento(id) {
+            await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+            obtenerElementos();
+        }
+        
+        obtenerElementos();
+    </script>
+</body>
+</html>

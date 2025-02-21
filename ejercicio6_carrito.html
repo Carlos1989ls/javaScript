@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de la compra</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        table { margin: auto; border-collapse: collapse; width: 50%; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Carrito de la compra</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Pan</td>
+                <td class="precio">1</td>
+                <td><input type="number" value="0" min="0" class="cantidad"></td>
+                <td class="subtotal">0</td>
+            </tr>
+            <tr>
+                <td>Galletas</td>
+                <td class="precio">5</td>
+                <td><input type="number" value="0" min="0" class="cantidad"></td>
+                <td class="subtotal">0</td>
+            </tr>
+            <tr>
+                <td>Leche</td>
+                <td class="precio">2</td>
+                <td><input type="number" value="0" min="0" class="cantidad"></td>
+                <td class="subtotal">0</td>
+            </tr>
+            <tr>
+                <td>Huevos</td>
+                <td class="precio">3</td>
+                <td><input type="number" value="0" min="0" class="cantidad"></td>
+                <td class="subtotal">0</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Total Carrito: <span id="total">0</span> €</h2>
+    
+    <script>
+        function actualizarTotal() {
+            let total = 0;
+            document.querySelectorAll("tbody tr").forEach(row => {
+                let precio = parseFloat(row.querySelector(".precio").textContent);
+                let cantidad = parseInt(row.querySelector(".cantidad").value);
+                let subtotal = precio * cantidad;
+                row.querySelector(".subtotal").textContent = subtotal;
+                total += subtotal;
+            });
+            document.getElementById("total").textContent = total;
+        }
+
+        document.querySelectorAll(".cantidad").forEach(input => {
+            input.addEventListener("input", actualizarTotal);
+        });
+    </script>
+</body>
+</html>
