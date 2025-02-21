@@ -19,49 +19,7 @@
     <br><br>
     <button onclick="window.location.href='index.html'">Volver al Inicio</button>
     
-    <script>
-        let palabraSecreta = "";
-        let palabraAdivinada = [];
-        let intentos = 10;
+<script src="js/script.js"></script>
 
-        async function obtenerPalabra() {
-            try {
-                let response = await fetch("https://random-word-api.herokuapp.com/word?number=1");
-                let data = await response.json();
-                palabraSecreta = data[0].toUpperCase();
-                palabraAdivinada = Array(palabraSecreta.length).fill("_");
-                document.getElementById("palabra").textContent = palabraAdivinada.join(" ");
-            } catch (error) {
-                alert("Error obteniendo la palabra");
-            }
-        }
-
-        function comprobarLetra() {
-            let letra = document.getElementById("letra").value.toUpperCase();
-            document.getElementById("letra").value = "";
-
-            if (letra && palabraSecreta.includes(letra)) {
-                for (let i = 0; i < palabraSecreta.length; i++) {
-                    if (palabraSecreta[i] === letra) {
-                        palabraAdivinada[i] = letra;
-                    }
-                }
-            } else {
-                intentos--;
-            }
-            document.getElementById("palabra").textContent = palabraAdivinada.join(" ");
-            document.getElementById("intentos").textContent = `Intentos restantes: ${intentos}`;
-
-            if (!palabraAdivinada.includes("_")) {
-                alert("¡Felicidades! Has adivinado la palabra: " + palabraSecreta);
-                obtenerPalabra();
-            } else if (intentos === 0) {
-                alert("Game over! La palabra era: " + palabraSecreta);
-                obtenerPalabra();
-            }
-        }
-
-        obtenerPalabra();
-    </script>
 </body>
 </html>

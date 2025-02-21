@@ -16,43 +16,6 @@
     <ul id="lista"></ul>
     <br><br>
     <button onclick="window.location.href='index.html'">Volver al Inicio</button>
-    <script>
-        const API_URL = "https://crudcrud.com/api/87b5f66d7d8545048a88d418f133f5b6/elementos";
-        
-        async function obtenerElementos() {
-            let response = await fetch(API_URL);
-            let data = await response.json();
-            let lista = document.getElementById("lista");
-            lista.innerHTML = "";
-            data.forEach(item => {
-                let li = document.createElement("li");
-                li.textContent = item.nombre;
-                let btnEliminar = document.createElement("button");
-                btnEliminar.textContent = "Eliminar";
-                btnEliminar.onclick = () => eliminarElemento(item._id);
-                li.appendChild(btnEliminar);
-                lista.appendChild(li);
-            });
-        }
-        
-        async function crearElemento() {
-            let nombre = document.getElementById("nombre").value;
-            if (!nombre) return;
-            await fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nombre })
-            });
-            document.getElementById("nombre").value = "";
-            obtenerElementos();
-        }
-        
-        async function eliminarElemento(id) {
-            await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-            obtenerElementos();
-        }
-        
-        obtenerElementos();
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

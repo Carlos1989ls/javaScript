@@ -17,25 +17,6 @@
     <br><br>
     <button onclick="window.location.href='index.html'">Volver al Inicio</button>
     
-    <script>
-        document.getElementById("liftoffButton").addEventListener("click", function() {
-            document.getElementById("statusReport").textContent = "Houston, we have liftoff!";
-        });
-
-        document.getElementById("abortMission").addEventListener("mouseover", function() {
-            this.style.backgroundColor = "red";
-        });
-
-        document.getElementById("abortMission").addEventListener("mouseout", function() {
-            this.style.backgroundColor = "";
-        });
-
-        document.getElementById("abortMission").addEventListener("click", function() {
-            let confirmAbort = confirm("Are you sure you want to abort the mission?");
-            if (confirmAbort) {
-                document.getElementById("statusReport").textContent = "Mission aborted! Space shuttle returning home.";
-            }
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

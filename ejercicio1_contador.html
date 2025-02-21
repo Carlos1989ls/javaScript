@@ -18,31 +18,6 @@
     <br><br>
     <button onclick="window.location.href='index.html'">Volver al Inicio</button>
     
-    <script>
-        let contador = 0;
-        function actualizarContador() {
-            document.getElementById("contador").textContent = contador;
-        }
-        function incrementar() {
-            if (contador < 10) {
-                contador++;
-                actualizarContador();
-            } else {
-                alert("El contador no puede ser mayor que 10");
-            }
-        }
-        function disminuir() {
-            if (contador > 0) {
-                contador--;
-                actualizarContador();
-            } else {
-                alert("El contador no puede ser negativo");
-            }
-        }
-        function resetear() {
-            contador = 0;
-            actualizarContador();
-        }
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
